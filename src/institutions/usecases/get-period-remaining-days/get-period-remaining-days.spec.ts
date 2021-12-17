@@ -10,7 +10,7 @@ class GetPeriodRemainingDays implements GetPeriodRemainingDaysResult {
         const remainingDays = differenceInCalendarDays(this.institutionByIdResult.periodEndDate, today);
         const isInFuture = periodEndDate > today;
         if (!isInFuture) {
-            throw new Error("The period end date is in the past.");
+            throw Error("The period end date is in the past.");
         }
         return { institutionId: this.institutionByIdResult.id, periodEndDate: periodEndDate, remainingDays };
     }
