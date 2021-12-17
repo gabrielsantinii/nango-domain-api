@@ -1,21 +1,6 @@
 import { GetActivitiesProgress } from ".";
-import { ActivityByInstitution, GetActivitiesByInstitutionIdResult, GetActivitiesProgressResult } from "../../interfaces";
-
-
-class GetActivitiesByInstitutionIdSpy implements GetActivitiesByInstitutionIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantActivities: ActivityByInstitution[] = [
-        { status: "finished", id: "123123", institutionId: "existant_institution" },
-        { status: "finished", id: "4124312412", institutionId: "existant_institution" },
-    ];
-
-    async perform() {
-        const activitiesByInstitutionId = this.existantActivities.filter(
-            (activity) => activity.institutionId === this.institutionId
-        );
-        return activitiesByInstitutionId;
-    }
-}
+import { GetActivitiesByInstitutionId } from "../get-activities-by-institution-id";
+import { GetActivitiesByInstitutionIdResult, GetActivitiesProgressResult } from "../../interfaces";
 
 type SutType = {
     sut: GetActivitiesProgressResult;
@@ -27,7 +12,7 @@ type SutParams = {
 };
 
 const makeSut = ({ institutionId }: SutParams): SutType => {
-    const getActivitiesByInstitutionIdSpy = new GetActivitiesByInstitutionIdSpy(institutionId);
+    const getActivitiesByInstitutionIdSpy = new GetActivitiesByInstitutionId(institutionId);
     const sut = new GetActivitiesProgress(getActivitiesByInstitutionIdSpy);
     return { sut, getActivitiesByInstitutionIdSpy };
 };
