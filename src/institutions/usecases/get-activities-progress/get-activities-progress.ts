@@ -1,4 +1,5 @@
-import { ActivityByInstitution, GetActivitiesByInstitutionIdResult, GetActivitiesProgressResult } from "../../interfaces";
+import { GetActivitiesProgressResult } from ".";
+import { ActivityByInstitution, GetActivitiesByInstitutionIdResult } from "../get-activities-by-institution-id";
 
 export class GetActivitiesProgress implements GetActivitiesProgressResult {
     constructor(private readonly getActivitiesByInstitutionId: GetActivitiesByInstitutionIdResult) {}

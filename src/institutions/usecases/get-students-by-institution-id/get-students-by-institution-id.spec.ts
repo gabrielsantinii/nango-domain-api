@@ -1,5 +1,4 @@
-import { GetStudentsByInstitutionIdResult } from '../../interfaces'
-import { GetStudentsByInstitutionId } from '.'
+import { GetStudentsByInstitutionId, GetStudentsByInstitutionIdResult } from ".";
 
 type SutParams = { institutionId: string };
 type SutType = { sut: GetStudentsByInstitutionIdResult; institutionId: string };

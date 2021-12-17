@@ -1,31 +1,24 @@
 import { Request, Response } from "express";
-import {
-    ActivitiesProgress,
-    InstitutionById,
-    RemainingDaysByInstitution,
-    StudentByInstitutionId,
-    ClassByInstitutionId,
-    EmployeeByInstitutionId,
-} from "../interfaces";
-import {
-    GetActivitiesByInstitutionId,
-    GetActivitiesProgress,
-    GetPeriodRemainingDays,
-    GetStudentsByInstitutionId,
-    GetClassesByInstitutionId,
-    GetEmployeesByInstitutionId,
-} from "../usecases";
+
+import { InstitutionById } from "../usecases/get-institution-by-id";
+import { GetActivitiesByInstitutionId } from "../usecases/get-activities-by-institution-id";
+import { ActivitiesProgress, GetActivitiesProgress } from "../usecases/get-activities-progress";
+import { GetPeriodRemainingDays, RemainingDaysByInstitution } from "../usecases/get-period-remaining-days";
+import { ClassByInstitutionId, GetClassesByInstitutionId } from "../usecases/get-classes-by-institution-id";
+import { GetStudentsByInstitutionId, StudentByInstitutionId } from "../usecases/get-students-by-institution-id";
+import { EmployeeByInstitutionId, GetEmployeesByInstitutionId } from "../usecases/get-employees-by-institution-id";
+
 export class MountDashboardController {
     private readonly errors: string[] = [];
 
     perform = async (request: Request, response: Response) => {
         const institution = request.body.institution as InstitutionById;
         const activitiesProgress = await this.performGetActivitiesProgress(institution.id);
-        const remainingDays = this.performGetPeriodRemainingDays(institution);
+        const remainingDays = this.performGetPeriodRemainingDays(institution.periodEndDate);
         const students = await this.performGetStudentsByInstitutionId(institution.id);
         const classes = await this.performGetClassesByInstitutionId(institution.id);
         const employees = await this.performGetEmployeesByInstitutionId(institution.id);
-        this.errors.length ? (response.statusCode = 206) : (response.statusCode = 200);
+        response.statusCode = this.errors.length ? 206 : 200;
 
         return response.json({
             errors: this.errors,
@@ -46,9 +39,9 @@ export class MountDashboardController {
         return activitiesProgress;
     };
 
-    private performGetPeriodRemainingDays = (institution: InstitutionById): RemainingDaysByInstitution => {
+    private performGetPeriodRemainingDays = (periodEndDate: Date): RemainingDaysByInstitution => {
         try {
-            const getPeriodRemainingDays = new GetPeriodRemainingDays(institution);
+            const getPeriodRemainingDays = new GetPeriodRemainingDays(periodEndDate);
             const remainingDaysResult = getPeriodRemainingDays.perform();
             return remainingDaysResult;
         } catch (err: any) {

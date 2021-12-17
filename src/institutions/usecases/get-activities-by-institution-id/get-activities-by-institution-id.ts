@@ -1,4 +1,4 @@
-import { ActivityByInstitution, GetActivitiesByInstitutionIdResult } from "../../interfaces";
+import { ActivityByInstitution, GetActivitiesByInstitutionIdResult } from ".";
 
 export class GetActivitiesByInstitutionId implements GetActivitiesByInstitutionIdResult {
     constructor(private readonly institutionId: string) {}

@@ -1,6 +1,5 @@
-import { GetActivitiesProgress } from ".";
-import { GetActivitiesByInstitutionId } from "../get-activities-by-institution-id";
-import { GetActivitiesByInstitutionIdResult, GetActivitiesProgressResult } from "../../interfaces";
+import { GetActivitiesProgress, GetActivitiesProgressResult } from ".";
+import { GetActivitiesByInstitutionId, GetActivitiesByInstitutionIdResult } from "../get-activities-by-institution-id";
 
 type SutType = {
     sut: GetActivitiesProgressResult;

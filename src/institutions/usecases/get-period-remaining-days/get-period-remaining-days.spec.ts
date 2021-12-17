@@ -1,14 +1,12 @@
 import { addDays } from "date-fns";
-import { GetPeriodRemainingDays } from ".";
-import { GetPeriodRemainingDaysResult, InstitutionById, RemainingDaysByInstitution } from "../../interfaces";
+import { GetPeriodRemainingDays, GetPeriodRemainingDaysResult } from ".";
 
-type SutType = { sut: GetPeriodRemainingDaysResult; institutionById: InstitutionById };
+type SutType = { sut: GetPeriodRemainingDaysResult};
 type SutParams = { daysToAdd: number };
 
 const makeSut = ({ daysToAdd }: SutParams): SutType => {
-    const institutionById: InstitutionById = { id: "any", name: "any", periodEndDate: addDays(new Date(), daysToAdd) };
-    const sut = new GetPeriodRemainingDays(institutionById);
-    return { sut, institutionById };
+    const sut = new GetPeriodRemainingDays(addDays(new Date(), daysToAdd));
+    return { sut };
 };
 
 describe("the period date need to be in the future", () => {

@@ -1,4 +1,5 @@
-import { GetClassesByInstitutionIdResult } from "../../interfaces";
+
+import { GetClassesByInstitutionIdResult } from ".";
 import { GetClassesByInstitutionId } from "./get-classes-by-institution-id";
 
 type SutParams = { institutionId: string };

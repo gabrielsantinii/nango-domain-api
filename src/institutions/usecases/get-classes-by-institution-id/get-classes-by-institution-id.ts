@@ -1,4 +1,4 @@
-import { ClassByInstitutionId, GetClassesByInstitutionIdResult } from "../../interfaces";
+import { ClassByInstitutionId, GetClassesByInstitutionIdResult } from ".";
 
 export class GetClassesByInstitutionId implements GetClassesByInstitutionIdResult {
     constructor(private readonly institutionId: string) {}
