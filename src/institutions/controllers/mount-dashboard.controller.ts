@@ -13,11 +13,11 @@ export class MountDashboardController {
 
     perform = async (request: Request, response: Response) => {
         const institution = request.body.institution as InstitutionById;
-        const activitiesProgress = await this.performGetActivitiesProgress(institution.id);
-        const remainingDays = this.performGetPeriodRemainingDays(institution.periodEndDate);
-        const students = await this.performGetStudentsByInstitutionId(institution.id);
-        const classes = await this.performGetClassesByInstitutionId(institution.id);
-        const employees = await this.performGetEmployeesByInstitutionId(institution.id);
+        const activitiesProgress = await this.getActivitiesProgress(institution.id);
+        const remainingDays = this.getPeriodRemainingDays(institution.periodEndDate);
+        const students = await this.getStudentsByInstitutionId(institution.id);
+        const classes = await this.getClassesByInstitutionId(institution.id);
+        const employees = await this.getEmployeesByInstitutionId(institution.id);
         response.statusCode = this.errors.length ? 206 : 200;
 
         return response.json({
@@ -32,14 +32,14 @@ export class MountDashboardController {
         });
     };
 
-    private performGetActivitiesProgress = async (institutionId: string): Promise<ActivitiesProgress> => {
+    private getActivitiesProgress = async (institutionId: string): Promise<ActivitiesProgress> => {
         const getActivitiesByInstitutionId = new GetActivitiesByInstitutionId(institutionId);
         const getActivitiesProgress = new GetActivitiesProgress(getActivitiesByInstitutionId);
         const activitiesProgress = await getActivitiesProgress.perform();
         return activitiesProgress;
     };
 
-    private performGetPeriodRemainingDays = (periodEndDate: Date): RemainingDaysByInstitution => {
+    private getPeriodRemainingDays = (periodEndDate: Date): RemainingDaysByInstitution => {
         try {
             const getPeriodRemainingDays = new GetPeriodRemainingDays(periodEndDate);
             const remainingDaysResult = getPeriodRemainingDays.perform();
@@ -50,19 +50,19 @@ export class MountDashboardController {
         }
     };
 
-    private performGetStudentsByInstitutionId = async (institutionId: string): Promise<StudentByInstitutionId[]> => {
+    private getStudentsByInstitutionId = async (institutionId: string): Promise<StudentByInstitutionId[]> => {
         const getStudentsByInstitutionId = new GetStudentsByInstitutionId(institutionId);
         const students = await getStudentsByInstitutionId.perform();
         return students;
     };
 
-    private performGetClassesByInstitutionId = async (institutionId: string): Promise<ClassByInstitutionId[]> => {
+    private getClassesByInstitutionId = async (institutionId: string): Promise<ClassByInstitutionId[]> => {
         const getClassesByInstitutionId = new GetClassesByInstitutionId(institutionId);
         const classes = await getClassesByInstitutionId.perform();
         return classes;
     };
 
-    private performGetEmployeesByInstitutionId = async (institutionId: string): Promise<EmployeeByInstitutionId[]> => {
+    private getEmployeesByInstitutionId = async (institutionId: string): Promise<EmployeeByInstitutionId[]> => {
         try {
             const getEmployeesByInstitutionId = new GetEmployeesByInstitutionId(institutionId);
             const employees = await getEmployeesByInstitutionId.perform();
