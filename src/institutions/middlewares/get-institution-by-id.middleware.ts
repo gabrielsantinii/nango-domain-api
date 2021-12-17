@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { GetInstitutionById } from "../usecases";
+import { GetInstitutionById } from "../usecases/get-institution-by-id";
 
 export class GetInstitutionByIdMiddleware {
     async perform(request: Request, response: Response, next: NextFunction) {
