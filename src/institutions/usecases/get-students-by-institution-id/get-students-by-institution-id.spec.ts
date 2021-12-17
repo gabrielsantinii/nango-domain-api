@@ -1,22 +1,5 @@
-interface StudentByInstitutionId {
-    institutionId: string;
-    id: string;
-}
-
-interface GetStudentsByInstitutionIdResult {
-    perform: () => Promise<StudentByInstitutionId[]>;
-}
-
-class GetStudentsByInstitutionId implements GetStudentsByInstitutionIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantsStudents: StudentByInstitutionId[] = [
-        { id: "any", institutionId: "existant_institution" },
-    ];
-    async perform() {
-        const students = this.existantsStudents.filter((student) => student.institutionId === this.institutionId);
-        return students;
-    }
-}
+import { GetStudentsByInstitutionIdResult } from '../../interfaces'
+import { GetStudentsByInstitutionId } from '.'
 
 type SutParams = { institutionId: string };
 type SutType = { sut: GetStudentsByInstitutionIdResult; institutionId: string };
