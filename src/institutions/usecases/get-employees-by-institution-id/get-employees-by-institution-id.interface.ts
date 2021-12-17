@@ -1,6 +1,11 @@
 export interface EmployeeByInstitutionId {
     id: string;
-    institutionId: string;
+    institutions: string[];
+    firstName: string;
+    lastName: string;
+    role: "educator" | "student" | "administrator" | "assistant";
+    active: boolean;
+    photoUrl: string;
 }
 
 export interface GetEmployeeByInstitutionIdResult {
