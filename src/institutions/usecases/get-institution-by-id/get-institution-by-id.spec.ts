@@ -1,13 +1,13 @@
 import { InstitutionById } from "../../interfaces/get-institution-by-id-result.interface";
 interface GetInstitutionByIdResult {
-    perform: () => InstitutionById;
+    perform: () => Promise<InstitutionById>;
 }
 
 class GetInstitutionByIdSpy implements GetInstitutionByIdResult {
     constructor(private readonly institutionId: string) {}
     private readonly existantIds: InstitutionById[] = [{ id: "existant_id", name: "any", periodEndDate: new Date() }];
 
-    perform() {
+    async perform() {
         const institutionById = this.existantIds.find((institution) => institution.id === this.institutionId);
         if (!institutionById) {
             throw Error("The institutionId does not exist.");
@@ -23,13 +23,13 @@ const makeSut = ({ institutionId }: SutType): GetInstitutionByIdResult => {
 describe("the get institution by id needs to return the institution record", () => {
     it("should return the same taken id on arguments.", async () => {
         const sut = makeSut({ institutionId: "existant_id" });
-        const institutionById = sut.perform();
+        const institutionById = await sut.perform();
         expect(institutionById.id).toBe("existant_id");
     });
 
     it("should throws exception for not found institution ID", async () => {
         const sut = makeSut({ institutionId: "not-existant-id" });
 
-        expect(() => sut.perform()).toThrow("The institutionId does not exist.");
+        expect(async () => await sut.perform()).rejects.toThrow("The institutionId does not exist.");
     });
 });
