@@ -1,33 +1,39 @@
 import { addDays, differenceInCalendarDays } from "date-fns";
+import { GetPeriodRemainingDaysResult, InstitutionById } from "../../interfaces";
 
-interface GetPeriodRemainingDays {
-    perform: () => { institutionId: string; periodEndDate: Date; remainingDays: number };
-}
-
-class GetPeriodRemainingDaysImp implements GetPeriodRemainingDays {
-    constructor(private readonly institutionId: string, private readonly addDays: number) {}
+class GetPeriodRemainingDays implements GetPeriodRemainingDaysResult {
+    constructor(private readonly institutionByIdResult: InstitutionById) {}
 
     perform() {
         const today = new Date();
-        const todayAfterAddDays = addDays(today, this.addDays);
-        const remainingDays = differenceInCalendarDays(todayAfterAddDays, today);
-        const isInFuture = todayAfterAddDays > today;
+        const periodEndDate = this.institutionByIdResult.periodEndDate;
+        const remainingDays = differenceInCalendarDays(this.institutionByIdResult.periodEndDate, today);
+        const isInFuture = periodEndDate > today;
         if (!isInFuture) {
             throw new Error("The period end date is in the past.");
         }
-        return { institutionId: this.institutionId, periodEndDate: todayAfterAddDays, remainingDays };
+        return { institutionId: this.institutionByIdResult.id, periodEndDate: periodEndDate, remainingDays };
     }
 }
 
+type SutType = { sut: GetPeriodRemainingDaysResult; institutionById: InstitutionById };
+type SutParams = { daysToAdd: number };
+
+const makeSut = ({ daysToAdd }: SutParams): SutType => {
+    const institutionById: InstitutionById = { id: "any", name: "any", periodEndDate: addDays(new Date(), daysToAdd) };
+    const sut = new GetPeriodRemainingDays(institutionById);
+    return { sut, institutionById };
+};
+
 describe("the period date need to be in the future", () => {
     it("should return an positive number for remaining days", () => {
-        const sut = new GetPeriodRemainingDaysImp("any_institution_id", 5);
-        const { remainingDays } = sut.perform();
+        const { sut } = makeSut({ daysToAdd: 1 });
+        const remainingDays = sut.perform().remainingDays;
         expect(remainingDays).toBeGreaterThan(0);
     });
 
     it("should throw erro cause the remaining days are not positive", () => {
-        const sut = new GetPeriodRemainingDaysImp("any_institution_id", 0);
+        const { sut } = makeSut({ daysToAdd: 0 });
         expect(() => sut.perform()).toThrow("The period end date is in the past.");
     });
 });
