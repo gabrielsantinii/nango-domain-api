@@ -1,23 +1,9 @@
-import { InstitutionById } from "../../interfaces/get-institution-by-id-result.interface";
-interface GetInstitutionByIdResult {
-    perform: () => Promise<InstitutionById>;
-}
+import { GetInstitutionByIdResult } from "../../interfaces";
+import { GetInstitutionById } from "./get-institution-by-id";
 
-class GetInstitutionByIdSpy implements GetInstitutionByIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantIds: InstitutionById[] = [{ id: "existant_id", name: "any", periodEndDate: new Date() }];
-
-    async perform() {
-        const institutionById = this.existantIds.find((institution) => institution.id === this.institutionId);
-        if (!institutionById) {
-            throw Error("The institutionId does not exist.");
-        }
-        return institutionById;
-    }
-}
 type SutType = { institutionId: string };
 const makeSut = ({ institutionId }: SutType): GetInstitutionByIdResult => {
-    return new GetInstitutionByIdSpy(institutionId);
+    return new GetInstitutionById(institutionId);
 };
 
 describe("the get institution by id needs to return the institution record", () => {
