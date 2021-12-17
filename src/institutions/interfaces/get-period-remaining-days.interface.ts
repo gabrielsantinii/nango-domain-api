@@ -1,3 +1,7 @@
+export interface RemainingDaysByInstitution {
+    remainingDays: number
+}
+
 export interface GetPeriodRemainingDaysResult {
-    perform: () => { institutionId: string; periodEndDate: Date; remainingDays: number };
+    perform: () => RemainingDaysByInstitution
 }

@@ -1,6 +1,6 @@
 import { addDays } from "date-fns";
 import { GetPeriodRemainingDays } from ".";
-import { GetPeriodRemainingDaysResult, InstitutionById } from "../../interfaces";
+import { GetPeriodRemainingDaysResult, InstitutionById, RemainingDaysByInstitution } from "../../interfaces";
 
 type SutType = { sut: GetPeriodRemainingDaysResult; institutionById: InstitutionById };
 type SutParams = { daysToAdd: number };
