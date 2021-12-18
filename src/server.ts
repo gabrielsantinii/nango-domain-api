@@ -1,6 +1,12 @@
 import http from "http";
+import dotenv from 'dotenv'
 import { app, routes } from "./app";
-import './shared/services/mongoose.service'
+
+import { FirebaseService, MongooseService } from './shared/services'
+
+dotenv.config()
+MongooseService.init()
+FirebaseService.init()
 
 const port = 8080;
 const server = http.createServer(app);

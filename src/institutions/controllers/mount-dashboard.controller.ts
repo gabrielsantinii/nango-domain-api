@@ -12,6 +12,8 @@ import { UsersDao } from "../../data/users/daos";
 import { UserModel } from "../../data/users/models";
 import { ClassesDao } from "../../data/classes/daos";
 import { ClassModel } from "../../data/classes/models";
+import { ActivitiesDao } from "../../data/activities/daos";
+import { ActivityModel } from "../../data/activities/models";
 
 export class MountDashboardController {
     private readonly errors: string[] = [];
@@ -38,8 +40,8 @@ export class MountDashboardController {
     };
 
     private getActivitiesProgress = async (institutionId: string): Promise<ActivitiesProgress> => {
-        const classesDao = new ClassesDao(ClassModel);
-        const getActivitiesByInstitutionId = new GetActivitiesByInstitutionId(institutionId, classesDao);
+        const activitiesDao = new ActivitiesDao(ActivityModel);
+        const getActivitiesByInstitutionId = new GetActivitiesByInstitutionId(institutionId, activitiesDao);
         const getActivitiesProgress = new GetActivitiesProgress(getActivitiesByInstitutionId);
         const activitiesProgress = await getActivitiesProgress.perform();
         return activitiesProgress;
@@ -64,7 +66,8 @@ export class MountDashboardController {
     };
 
     private getClassesByInstitutionId = async (institutionId: string): Promise<ClassByInstitutionId[]> => {
-        const getClassesByInstitutionId = new GetClassesByInstitutionId(institutionId);
+        const classesDao = new ClassesDao(ClassModel);
+        const getClassesByInstitutionId = new GetClassesByInstitutionId(institutionId, classesDao);
         const classes = await getClassesByInstitutionId.perform();
         return classes;
     };
