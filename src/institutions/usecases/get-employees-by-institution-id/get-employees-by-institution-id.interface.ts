@@ -1,10 +1,10 @@
-import { StatusType } from "../../../shared/types";
+import { Status } from "../../../shared/enums";
 
 export interface EmployeeByInstitutionId {
     id: string;
     firstName: string;
     lastName: string;
-    status: StatusType;
+    status: Status;
     photoUrl: string;
 }
 

@@ -1,10 +1,10 @@
-import { StatusType } from "../types";
+import { Status } from "../enums";
 
 export interface LogDto {
     createdAt: Date;
     updatedAt: Date;
     id: string;
-    status: StatusType;
+    status: Status;
     inactivatedAt?: Date;
     inactivationReason?: string;
 }
