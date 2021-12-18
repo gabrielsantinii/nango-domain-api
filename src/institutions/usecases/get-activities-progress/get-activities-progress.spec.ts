@@ -1,4 +1,5 @@
 import { GetActivitiesProgress, GetActivitiesProgressResult } from ".";
+import { ClassesDaoResult } from "../../../data/classes/daos";
 import { GetActivitiesByInstitutionId, GetActivitiesByInstitutionIdResult } from "../get-activities-by-institution-id";
 
 type SutType = {
@@ -10,8 +11,11 @@ type SutParams = {
     institutionId: string;
 };
 
+const classesDaoMock: ClassesDaoResult = { findByInstitutionId: jest.fn() };
+
 const makeSut = ({ institutionId }: SutParams): SutType => {
-    const getActivitiesByInstitutionIdSpy = new GetActivitiesByInstitutionId(institutionId);
+    classesDaoMock.findByInstitutionId = jest.fn().mockReturnValue([]);
+    const getActivitiesByInstitutionIdSpy = new GetActivitiesByInstitutionId(institutionId, classesDaoMock);
     const sut = new GetActivitiesProgress(getActivitiesByInstitutionIdSpy);
     return { sut, getActivitiesByInstitutionIdSpy };
 };

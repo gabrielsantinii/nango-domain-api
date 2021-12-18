@@ -1,16 +1,11 @@
-import { ActivityByInstitution, GetActivitiesByInstitutionIdResult } from ".";
+import { GetActivitiesByInstitutionIdResult } from ".";
+import { ClassesDaoResult } from "../../../data/classes/daos";
 
 export class GetActivitiesByInstitutionId implements GetActivitiesByInstitutionIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantActivities: ActivityByInstitution[] = [
-        { status: "finished", id: "123123", institutionId: "existant_institution" },
-        { status: "finished", id: "4124312412", institutionId: "existant_institution" },
-    ];
+    constructor(private readonly institutionId: string, private readonly classesDao: ClassesDaoResult) {}
 
     async perform() {
-        const activitiesByInstitutionId = this.existantActivities.filter(
-            (activity) => activity.institutionId === this.institutionId
-        );
-        return activitiesByInstitutionId;
+        const activities = await this.classesDao.findByInstitutionId(this.institutionId);
+        return activities;
     }
 }
