@@ -6,6 +6,7 @@ export interface UserDto extends LogDto {
     authId: string;
     firstName: string;
     lastName: string;
+    displayName: string;
     birthday?: string;
     profileType: UserProfileType;
     cpfCnpj: string;

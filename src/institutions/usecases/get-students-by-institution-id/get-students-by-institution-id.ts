@@ -1,20 +1,11 @@
-import { GetStudentsByInstitutionIdResult, StudentByInstitutionId } from ".";
+import { GetStudentsByInstitutionIdResult } from ".";
+import { UsersDaoResult } from "../../../data/users/daos";
 
 export class GetStudentsByInstitutionId implements GetStudentsByInstitutionIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantsStudents: StudentByInstitutionId[] = [
-        {
-            id: "any",
-            institutions: ["existant_institution"],
-            displayName: "Any Name",
-            email: "any@example.com",
-            firstName: "Any",
-            lastName: "Name",
-            photoUrl: "",
-        },
-    ];
+    constructor(private readonly institutionId: string, private readonly usersDao: UsersDaoResult) {}
+
     async perform() {
-        const students = this.existantsStudents.filter((student) => student.institutions.includes(this.institutionId));
+        const students = await this.usersDao.findStudentsByInstitutionId(this.institutionId);
         return students;
     }
 }

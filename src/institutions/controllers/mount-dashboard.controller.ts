@@ -54,7 +54,8 @@ export class MountDashboardController {
     };
 
     private getStudentsByInstitutionId = async (institutionId: string): Promise<StudentByInstitutionId[]> => {
-        const getStudentsByInstitutionId = new GetStudentsByInstitutionId(institutionId);
+        const usersDao = new UsersDao(UserModel);
+        const getStudentsByInstitutionId = new GetStudentsByInstitutionId(institutionId, usersDao);
         const students = await getStudentsByInstitutionId.perform();
         return students;
     };
