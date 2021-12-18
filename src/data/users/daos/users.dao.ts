@@ -9,10 +9,10 @@ export class UsersDao implements UsersDaoResult {
     }
 
     async findStudentsByInstitutionId(institutionId: string) {
-        return this.User.find({ profileType: "student", institutions: { $in: institutionId } });
+        return this.User.find({ profileType: "student", institutions: { $in: institutionId } }).exec();
     }
 
     async findEmployeesByInstitutionId(institutionId: string) {
-        return this.User.find({ profileType: { $ne: "student" }, institutions: { $in: institutionId } });
+        return this.User.find({ profileType: { $ne: "student" }, institutions: { $in: institutionId } }).exec();
     }
 }

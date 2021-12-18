@@ -1,20 +1,23 @@
 import { ClassByInstitutionId, GetClassesByInstitutionIdResult } from ".";
+import { ClassesDaoResult } from "../../../data/classes/daos";
+import { ClassDto } from "../../../data/classes/dtos";
 
 export class GetClassesByInstitutionId implements GetClassesByInstitutionIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantClasses: ClassByInstitutionId[] = [
-        {
-            id: "any",
-            institutionId: "existant_institution",
-            name: "any-class-name",
-            educators: [{ id: "any_ed_id", name: "any-Name" }],
-            studentsCount: 10,
-            trailsCount: 12,
-        },
-    ];
+    constructor(private readonly institutionId: string, private readonly classesDao: ClassesDaoResult) {}
 
     async perform() {
-        const classes = this.existantClasses.filter((eClass) => eClass.institutionId === this.institutionId);
-        return classes;
+        const classes = await this.classesDao.findByInstitutionId(this.institutionId);
+        return this.formatToClassByInstitutionId(classes);
+    }
+
+    private formatToClassByInstitutionId(classes: ClassDto[]): ClassByInstitutionId[] {
+        return classes.map((unfClass) => ({
+            name: unfClass.name,
+            id: unfClass.id,
+            institutionId: unfClass.institutionId,
+            educators: unfClass.educators,
+            trailsCount: 0,
+            studentsCount: unfClass.students.length,
+        }));
     }
 }

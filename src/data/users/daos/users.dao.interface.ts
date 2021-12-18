@@ -1,4 +1,4 @@
-import { UserDto } from '../dtos'
+import { UserDto } from "../dtos";
 
 export interface UsersDaoResult {
     findStudentsByInstitutionId: (institutionId: string) => Promise<UserDto[]>;
