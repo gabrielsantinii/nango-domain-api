@@ -1,8 +1,7 @@
-import { LogDto } from "../../../shared/dtos";
 import { Address } from "../../../shared/interfaces";
-import { InstitutionCategoryType } from "../types";
+import { InstitutionCategoryType } from "../enums";
 
-export interface InstitutionDto extends LogDto {
+export interface CreateInstitutionDto {
     name: string;
     categories: InstitutionCategoryType[];
     email: string;

@@ -1,5 +1,5 @@
 import { Address } from "../../../shared/interfaces";
-import { UserProfileType } from "../types";
+import { UserProfileType } from "../enums";
 
 export interface CreateUserDto {
     authId: string;
