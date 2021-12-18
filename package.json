@@ -6,7 +6,7 @@
     "license": "MIT",
     "scripts": {
         "test": "jest",
-        "dev": "ts-node-dev src/server.ts"
+        "dev": "export TEST=* && ts-node-dev src/server.ts"
     },
     "dependencies": {
         "cors": "^2.8.5",
@@ -23,6 +23,7 @@
         "@types/jest": "^27.0.3",
         "@types/mongoose": "^5.11.97",
         "jest": "^27.4.5",
+        "mongodb-memory-server": "^8.0.4",
         "ts-jest": "^27.1.2",
         "ts-node-dev": "^1.1.8",
         "tslint": "^6.1.3",
