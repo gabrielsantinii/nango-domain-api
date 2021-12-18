@@ -6,7 +6,6 @@ export interface CreateInstitutionDto {
     categories: InstitutionCategory[];
     email: string;
     website: string;
-    contactPersonId: string;
     address: Address;
     rangeOfEmployees: string;
     rangeOfStudents: string;

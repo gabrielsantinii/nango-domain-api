@@ -1,9 +1,11 @@
 import { CreateUserDto } from "../../data/users/dtos";
+import { UserProfileType } from "../../data/users/enums";
+import { AddressTestUtils } from "../../shared/__tests__";
 
 export class UsersTestUtils {
     static getValidUser(): CreateUserDto {
         return {
-            address: { city: "Balneário", country: "Brasil", postalCode: "88330483", state: "SC", street: "Rua 1001" },
+            address: AddressTestUtils.getValidAddress(),
             authId: "any_auth-id",
             cpfCnpj: "12347398955",
             displayName: "Valid User",
@@ -13,7 +15,7 @@ export class UsersTestUtils {
             lastName: "User",
             phone: "47988102833",
             photoUrl: "",
-            profileType: "student",
+            profileType: UserProfileType.student,
         };
     }
 }
