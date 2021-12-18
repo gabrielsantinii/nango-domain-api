@@ -1,7 +1,8 @@
+import { LogDto } from "../../../shared/dtos";
 import { Address } from "../../../shared/interfaces";
 import { InstitutionCategoryType } from "../types";
 
-export interface InstitutionDto {
+export interface InstitutionDto extends LogDto {
     name: string;
     categories: InstitutionCategoryType[];
     email: string;
@@ -11,9 +12,5 @@ export interface InstitutionDto {
     rangeOfEmployees: string;
     rangeOfStudents: string;
     periodEndDate: Date;
-    createdAt: Date;
-    updatedAt: Date;
-    inactivatedAt?: Date;
-    inactivationReason?: string;
-    id: string;
+    photoUrl: string;
 }

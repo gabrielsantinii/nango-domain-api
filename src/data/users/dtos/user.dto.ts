@@ -1,9 +1,9 @@
+import { LogDto } from "../../../shared/dtos";
 import { Address } from "../../../shared/interfaces";
 import { UserProfileType } from "../types";
 
-export interface UserDto {
+export interface UserDto extends LogDto {
     authId: string;
-    id: string;
     firstName: string;
     lastName: string;
     birthday?: string;
@@ -12,9 +12,6 @@ export interface UserDto {
     email: string;
     phone: string;
     address: Address;
-    createdAt: Date;
-    updatedAt: Date;
-    inactivatedAt?: Date;
-    inactivationReason?: string;
-    institutions: string[]
+    institutions: string[];
+    photoUrl: string;
 }

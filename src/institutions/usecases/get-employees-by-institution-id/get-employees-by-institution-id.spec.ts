@@ -1,10 +1,17 @@
 import { GetEmployeeByInstitutionIdResult, GetEmployeesByInstitutionId } from ".";
+import { UsersDaoResult } from "../../../data/users/daos";
 
 type SutParams = { institutionId: string };
 type SutType = { institutionId: string; sut: GetEmployeeByInstitutionIdResult };
 
+const mockDao: UsersDaoResult = {
+    findEmployeesByInstitutionId: jest.fn(),
+    findById: jest.fn(),
+    findStudentsByInstitutionId: jest.fn(),
+};
+
 const makeSut = ({ institutionId }: SutParams): SutType => {
-    const sut = new GetEmployeesByInstitutionId(institutionId);
+    const sut = new GetEmployeesByInstitutionId(institutionId, mockDao);
     return { sut, institutionId };
 };
 
@@ -17,8 +24,8 @@ describe("get-employees-by-institution-id needs to return a list of employees re
 
     it("should return the filled list of employees", async () => {
         const { sut } = makeSut({ institutionId: "existant_institution" });
+        mockDao.findEmployeesByInstitutionId = jest.fn().mockReturnValue([{}, {}]);
         const employees = await sut.perform();
-
         expect(employees.length).toBeGreaterThanOrEqual(1);
     });
 });

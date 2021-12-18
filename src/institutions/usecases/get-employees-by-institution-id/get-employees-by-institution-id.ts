@@ -1,22 +1,11 @@
-import { GetEmployeeByInstitutionIdResult, EmployeeByInstitutionId } from ".";
+import { GetEmployeeByInstitutionIdResult } from ".";
+import { UsersDaoResult } from "../../../data/users/daos";
 
 export class GetEmployeesByInstitutionId implements GetEmployeeByInstitutionIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantEmployees: EmployeeByInstitutionId[] = [
-        {
-            id: "any",
-            institutions: ["existant_institution"],
-            active: true,
-            firstName: "First",
-            lastName: "Last",
-            photoUrl: "",
-            role: "educator",
-        },
-    ];
+    constructor(private readonly institutionId: string, private readonly usersDao: UsersDaoResult) {}
+
     async perform() {
-        const employees = this.existantEmployees.filter((employee) =>
-            employee.institutions.includes(this.institutionId)
-        );
+        const employees = await this.usersDao.findEmployeesByInstitutionId(this.institutionId);
         if (!employees.length) {
             throw new Error(`The institutionId ${this.institutionId} has no employees.`);
         }

@@ -6,7 +6,10 @@ import { GetPeriodRemainingDays, RemainingDaysByInstitution } from "../usecases/
 import { ClassByInstitutionId, GetClassesByInstitutionId } from "../usecases/get-classes-by-institution-id";
 import { GetStudentsByInstitutionId, StudentByInstitutionId } from "../usecases/get-students-by-institution-id";
 import { EmployeeByInstitutionId, GetEmployeesByInstitutionId } from "../usecases/get-employees-by-institution-id";
+
 import { InstitutionDto } from "../../data/institutions/dtos";
+import { UsersDao } from "../../data/users/daos";
+import { UserModel } from "../../data/users/models";
 
 export class MountDashboardController {
     private readonly errors: string[] = [];
@@ -64,7 +67,8 @@ export class MountDashboardController {
 
     private getEmployeesByInstitutionId = async (institutionId: string): Promise<EmployeeByInstitutionId[]> => {
         try {
-            const getEmployeesByInstitutionId = new GetEmployeesByInstitutionId(institutionId);
+            const usersDao = new UsersDao(UserModel);
+            const getEmployeesByInstitutionId = new GetEmployeesByInstitutionId(institutionId, usersDao);
             const employees = await getEmployeesByInstitutionId.perform();
             return employees;
         } catch (err: any) {
