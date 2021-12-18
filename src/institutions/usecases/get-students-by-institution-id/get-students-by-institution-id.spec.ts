@@ -8,6 +8,7 @@ const usersDaoMock: UsersDaoResult = {
     findEmployeesByInstitutionId: jest.fn(),
     findById: jest.fn(),
     findStudentsByInstitutionId: jest.fn(),
+    create: jest.fn(),
 };
 
 const makeSut = ({ institutionId }: SutParams): SutType => {
