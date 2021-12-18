@@ -10,8 +10,10 @@ export interface InstitutionDto {
     address: Address;
     rangeOfEmployees: string;
     rangeOfStudents: string;
+    periodEndDate: Date;
     createdAt: Date;
     updatedAt: Date;
     inactivatedAt?: Date;
     inactivationReason?: string;
+    id: string;
 }

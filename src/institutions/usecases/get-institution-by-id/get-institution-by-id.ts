@@ -1,11 +1,11 @@
-import { GetInstitutionByIdResult, InstitutionById } from ".";
+import { GetInstitutionByIdResult } from ".";
+import { InstitutionsDaoResult } from "../../../data/institutions/daos";
 
 export class GetInstitutionById implements GetInstitutionByIdResult {
-    constructor(private readonly institutionId: string) {}
-    private readonly existantIds: InstitutionById[] = [{ id: "existant_id", name: "any", periodEndDate: new Date() }];
+    constructor(private readonly institutionId: string, private readonly institutionsDao: InstitutionsDaoResult) {}
 
     async perform() {
-        const institutionById = this.existantIds.find((institution) => institution.id === this.institutionId);
+        const institutionById = await this.institutionsDao.findById(this.institutionId);
         if (!institutionById) {
             throw Error("The institutionId does not exist.");
         }

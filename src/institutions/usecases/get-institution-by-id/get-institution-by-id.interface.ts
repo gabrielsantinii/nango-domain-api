@@ -1,9 +1,5 @@
-export interface InstitutionById {
-    id: string;
-    periodEndDate: Date;
-    name: string;
-}
+import { InstitutionDto } from "../../../data/institutions/dtos";
 
 export interface GetInstitutionByIdResult {
-    perform: () => Promise<InstitutionById>
+    perform: () => Promise<InstitutionDto>;
 }

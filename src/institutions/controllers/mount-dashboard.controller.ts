@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
 
-import { InstitutionById } from "../usecases/get-institution-by-id";
 import { GetActivitiesByInstitutionId } from "../usecases/get-activities-by-institution-id";
 import { ActivitiesProgress, GetActivitiesProgress } from "../usecases/get-activities-progress";
 import { GetPeriodRemainingDays, RemainingDaysByInstitution } from "../usecases/get-period-remaining-days";
 import { ClassByInstitutionId, GetClassesByInstitutionId } from "../usecases/get-classes-by-institution-id";
 import { GetStudentsByInstitutionId, StudentByInstitutionId } from "../usecases/get-students-by-institution-id";
 import { EmployeeByInstitutionId, GetEmployeesByInstitutionId } from "../usecases/get-employees-by-institution-id";
+import { InstitutionDto } from "../../data/institutions/dtos";
 
 export class MountDashboardController {
     private readonly errors: string[] = [];
 
     perform = async (request: Request, response: Response) => {
-        const institution = request.body.institution as InstitutionById;
+        const institution = request.body.institution as InstitutionDto;
         const activitiesProgress = await this.getActivitiesProgress(institution.id);
         const remainingDays = this.getPeriodRemainingDays(institution.periodEndDate);
         const students = await this.getStudentsByInstitutionId(institution.id);
