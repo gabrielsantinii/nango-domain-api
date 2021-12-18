@@ -1,4 +1,5 @@
 import { UsersDaoResult } from ".";
+import { CreateUserDto } from "../dtos/create.user.dto";
 import { UserModelType } from "../models";
 
 export class UsersDao implements UsersDaoResult {
@@ -14,5 +15,10 @@ export class UsersDao implements UsersDaoResult {
 
     async findEmployeesByInstitutionId(institutionId: string) {
         return this.User.find({ profileType: { $ne: "student" }, institutions: { $in: institutionId } }).exec();
+    }
+
+    async create(userData: CreateUserDto) {
+        const newUser = new this.User(userData);
+        return newUser.save();
     }
 }
