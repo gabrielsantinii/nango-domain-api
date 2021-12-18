@@ -7,7 +7,7 @@ import { ClassByInstitutionId, GetClassesByInstitutionId } from "../usecases/get
 import { GetStudentsByInstitutionId, StudentByInstitutionId } from "../usecases/get-students-by-institution-id";
 import { EmployeeByInstitutionId, GetEmployeesByInstitutionId } from "../usecases/get-employees-by-institution-id";
 
-import { InstitutionDto } from "../../data/institutions/dtos";
+import { ReadInstitutionDto } from "../../data/institutions/dtos";
 import { UsersDao } from "../../data/users/daos";
 import { UserModel } from "../../data/users/models";
 import { ClassesDao } from "../../data/classes/daos";
@@ -19,7 +19,7 @@ export class MountDashboardController {
     private readonly errors: string[] = [];
 
     perform = async (request: Request, response: Response) => {
-        const institution = request.body.institution as InstitutionDto;
+        const institution = request.body.institution as ReadInstitutionDto;
         const activitiesProgress = await this.getActivitiesProgress(institution.id);
         const remainingDays = this.getPeriodRemainingDays(institution.periodEndDate);
         const students = await this.getStudentsByInstitutionId(institution.id);

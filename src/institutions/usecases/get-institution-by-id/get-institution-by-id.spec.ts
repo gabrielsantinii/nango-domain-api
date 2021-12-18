@@ -2,7 +2,7 @@ import { GetInstitutionByIdResult } from ".";
 import { InstitutionsDaoResult } from "../../../data/institutions/daos";
 import { GetInstitutionById } from "./get-institution-by-id";
 
-const mockDao: InstitutionsDaoResult = { findById: jest.fn() };
+const mockDao: InstitutionsDaoResult = { findById: jest.fn(), create: jest.fn() };
 
 type SutType = { institutionId: string };
 const makeSut = ({ institutionId }: SutType): GetInstitutionByIdResult => {
