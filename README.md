@@ -2,9 +2,9 @@
 
 **Nango é a plataforma de ensino que acredita na evolução. A primitividade no aprendizado não precisa existir, pensamos que a tecnologia deve andar lado a lado com o modo de aprender.**
 
-## Search API
+## Domain API
 
-Este diretório se refere a de consultas do app, projetada para o front-end construir as telas de acordo a regra de negócio. Os detalhes features e módulos da aplicação, ficam disponíveis no [repositório fonte.]()https://github.com/gabrielsantinii/nango
+Este diretório se refere a API de domínio do app, projetada para ter domínio das regras de negócio da plataforma, a API tem responsabilidade de garantir a integridade dos dados. Os detalhes features e módulos da aplicação, ficam disponíveis no [repositório fonte.](https://github.com/gabrielsantinii/nango)
 
 
 ## Instalação
