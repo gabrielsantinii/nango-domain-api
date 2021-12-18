@@ -1,9 +1,9 @@
 import { Address } from "../../../shared/interfaces";
-import { InstitutionCategoryType } from "../enums";
+import { InstitutionCategory } from "../enums";
 
 export interface CreateInstitutionDto {
     name: string;
-    categories: InstitutionCategoryType[];
+    categories: InstitutionCategory[];
     email: string;
     website: string;
     contactPersonId: string;
