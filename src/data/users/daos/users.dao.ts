@@ -1,6 +1,7 @@
 import { UsersDaoResult } from ".";
 import { CreateUserDto } from "../dtos/create.user.dto";
 import { UserModelType } from "../models";
+import { v4 as uuidFactory } from "uuid";
 
 export class UsersDao implements UsersDaoResult {
     constructor(private readonly User: UserModelType) {}
@@ -18,7 +19,8 @@ export class UsersDao implements UsersDaoResult {
     }
 
     async create(userData: CreateUserDto) {
-        const newUser = new this.User(userData);
+        const newUser = new this.User({ ...userData, id: uuidFactory() });
+
         return newUser.save();
     }
 }
