@@ -1,4 +1,5 @@
 import { Address } from "../../../shared/interfaces";
+import { UserProfileType } from "../types";
 
 export interface UserDto {
     authId: string;
@@ -6,7 +7,7 @@ export interface UserDto {
     firstName: string;
     lastName: string;
     birthday?: string;
-    profileType: "student" | "educator" | "admin";
+    profileType: UserProfileType;
     cpfCnpj: string;
     email: string;
     phone: string;
@@ -15,4 +16,5 @@ export interface UserDto {
     updatedAt: Date;
     inactivatedAt?: Date;
     inactivationReason?: string;
+    institutions: string[]
 }
