@@ -4,7 +4,7 @@
 
 ## Search API
 
-Este diretório se refere a de consultas do app, projetada para o front-end construir as telas de acordo a regra de negócio. Os detalhes features e módulos da aplicação, ficam disponíveis no [repositório fonte.]()https://github.com/gabrielsantinii/nango
+Este diretório se refere a API de consultas do app, projetada para o front-end construir as telas de acordo a regra de negócio. Os detalhes features e módulos da aplicação, ficam disponíveis no [repositório fonte.](https://github.com/gabrielsantinii/nango)
 
 
 ## Instalação
