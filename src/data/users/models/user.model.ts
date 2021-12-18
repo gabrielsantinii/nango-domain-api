@@ -1,7 +1,7 @@
 import { Document, Schema, model, Model } from "mongoose";
-import { UserDto } from "../dtos";
+import { ReadUserDto } from "../dtos";
 
-type IUserModel = UserDto & Document;
+type IUserModel = ReadUserDto & Document;
 
 const UserSchema: Schema<IUserModel> = new Schema();
 const UserModel = model<IUserModel>("users", UserSchema);

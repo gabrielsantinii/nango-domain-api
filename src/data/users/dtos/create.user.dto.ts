@@ -1,8 +1,7 @@
-import { LogDto } from "../../../shared/dtos";
 import { Address } from "../../../shared/interfaces";
 import { UserProfileType } from "../types";
 
-export interface UserDto extends LogDto {
+export interface CreateUserDto {
     authId: string;
     firstName: string;
     lastName: string;
