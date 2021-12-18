@@ -10,6 +10,8 @@ import { EmployeeByInstitutionId, GetEmployeesByInstitutionId } from "../usecase
 import { InstitutionDto } from "../../data/institutions/dtos";
 import { UsersDao } from "../../data/users/daos";
 import { UserModel } from "../../data/users/models";
+import { ClassesDao } from "../../data/classes/daos";
+import { ClassModel } from "../../data/classes/models";
 
 export class MountDashboardController {
     private readonly errors: string[] = [];
@@ -36,7 +38,8 @@ export class MountDashboardController {
     };
 
     private getActivitiesProgress = async (institutionId: string): Promise<ActivitiesProgress> => {
-        const getActivitiesByInstitutionId = new GetActivitiesByInstitutionId(institutionId);
+        const classesDao = new ClassesDao(ClassModel);
+        const getActivitiesByInstitutionId = new GetActivitiesByInstitutionId(institutionId, classesDao);
         const getActivitiesProgress = new GetActivitiesProgress(getActivitiesByInstitutionId);
         const activitiesProgress = await getActivitiesProgress.perform();
         return activitiesProgress;
