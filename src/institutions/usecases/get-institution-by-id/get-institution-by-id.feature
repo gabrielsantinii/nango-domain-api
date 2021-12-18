@@ -1,7 +1,7 @@
 Feature: Retornar instituição a partir do ID de referência.
 Scenario: Será dado a identificação da instituição
 
-@Sucess
+@Success
 - Deve retornar os dados da instituição
 
 @Exception

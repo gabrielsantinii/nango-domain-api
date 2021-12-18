@@ -1,7 +1,7 @@
 Feature: Retornar os colaboradores relacionadas a instituição pelo ID (institutionId).
 Scenario: Será dado a identificação da instituição
 
-@Sucess
+@Success
 - Deve retornar uma lista de colaboradores relacionados
 
 @Exception

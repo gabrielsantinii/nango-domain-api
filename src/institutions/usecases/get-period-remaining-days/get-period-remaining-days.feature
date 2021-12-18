@@ -1,7 +1,7 @@
 Feature: Retornar contagem de números em dias faltantes para finalização do semestre.
 Scenario: Será dado a identificação da instituição
 
-@Sucess
+@Success
 - Deve calcular a diferença de dias entre agora e a data de finalização do semestre configurada do semestre
 - Deve retornar um numérico
 
