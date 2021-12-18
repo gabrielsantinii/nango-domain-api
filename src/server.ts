@@ -1,5 +1,6 @@
 import http from "http";
 import { app, routes } from "./app";
+import './shared/services/mongoose.service'
 
 const port = 8080;
 const server = http.createServer(app);
