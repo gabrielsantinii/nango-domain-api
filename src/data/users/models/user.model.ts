@@ -12,25 +12,25 @@ const UserSchema: Schema<IUserModel> = new Schema(
         displayName: { type: String, required: true },
         birthday: Date,
         profileType: { type: String, enum: Object.values(UserProfileType) },
-        cpfCnpj: { type: String, required: true },
+        cpfCnpj: { type: String },
         email: { type: String, required: true },
         institutions: [{ type: String, required: true }],
         phone: { type: String, required: true },
-        photoUrl: { type: String, required: true, default: "" },
+        photoUrl: { type: String, default: "" },
         authId: { type: String, required: true },
         address: {
-            country: { type: String, required: true },
+            required: false,
+            country: { type: String, required: false },
             postalCode: { type: String, default: "" },
-            city: { type: String, required: true },
+            city: { type: String, required: false },
             street: { type: String, default: "" },
-            state: { type: String, required: true },
+            state: { type: String, required: false },
         },
         createdAt: { type: Date, required: true },
         updatedAt: { type: Date, required: true },
         id: { type: String, required: true },
         status: { type: String, required: true, enum: Object.values(Status) },
-    },
-    { _id: false }
+    }
 );
 const UserModel = model<IUserModel>("users", UserSchema);
 
