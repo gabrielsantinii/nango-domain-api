@@ -14,6 +14,11 @@ export class InstitutionsTestUtils {
             website: "any website",
             categories: [InstitutionCategory.college],
             address: AddressTestUtils.getValidAddress(),
+            contactPerson: {
+                name: "person 1",
+                email: "emal@gmail.com",
+                phone: "47988210231",
+            },
         };
     }
 }
