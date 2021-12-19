@@ -8,10 +8,11 @@ export interface CreateUserDto {
     displayName: string;
     birthday?: string;
     profileType: UserProfileType;
-    cpfCnpj: string;
+    cpfCnpj?: string;
     email: string;
     phone: string;
-    address: Address;
+    address?: Address;
     institutions: string[];
-    photoUrl: string;
+    photoUrl?: string;
+    
 }
