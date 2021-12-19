@@ -5,8 +5,10 @@
     "author": "Gabriel Santini <gabrielgsantini@gmail.com>",
     "license": "MIT",
     "scripts": {
+        "build": "tsc",
+        "start": "node dist/src/server.js",
         "test": "jest",
-        "dev": "ts-node-dev src/server.ts"
+        "dev": "export TEST=* && ts-node-dev src/server.ts"
     },
     "dependencies": {
         "cors": "^2.8.5",
