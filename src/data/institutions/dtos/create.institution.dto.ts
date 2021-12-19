@@ -4,11 +4,15 @@ import { InstitutionCategory } from "../enums";
 export interface CreateInstitutionDto {
     name: string;
     categories: InstitutionCategory[];
-    email: string;
     website: string;
     address: Address;
     rangeOfEmployees: string;
     rangeOfStudents: string;
     periodEndDate: Date;
-    photoUrl: string;
+    photoUrl?: string;
+    contactPerson: {
+        name: string;
+        email: string;
+        phone: string;
+    };
 }

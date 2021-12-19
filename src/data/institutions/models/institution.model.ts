@@ -7,15 +7,14 @@ import { InstitutionCategory } from "../enums";
 type InstitutionDocument = ReadInstitutionDto & Document;
 
 const InstitutionSchema: Schema<InstitutionDocument> = new Schema({
-    email: { type: String, required: true },
     name: { type: String, required: true },
-    website: { type: String },
+    website: { type: String, default: "" },
     rangeOfStudents: { type: String, required: true },
-    periodEndDate: { type: Date, required: true, default: addMonths(new Date(), 6) },
+    periodEndDate: { type: Date, default: addMonths(new Date(), 6) },
     categories: { type: [String], required: true, enum: Object.values(InstitutionCategory) },
 
     rangeOfEmployees: { type: String, required: true },
-    photoUrl: { type: String, required: true, default: "" },
+    photoUrl: { type: String, default: "" },
     address: {
         country: { type: String, required: true },
         postalCode: { type: String, default: "" },
@@ -27,7 +26,7 @@ const InstitutionSchema: Schema<InstitutionDocument> = new Schema({
     updatedAt: { type: Date, required: true },
     id: { type: String, required: true },
     status: { type: String, required: true, enum: Object.values(Status) },
-});
+}, );
 const InstitutionModel = model<InstitutionDocument>("institutions", InstitutionSchema);
 
 type InstitutionModelType = Model<InstitutionDocument>;
