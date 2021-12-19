@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { CreateInstitutionDto } from "../../data/institutions/dtos";
-import { CreateAuth } from "../../auth/usecases";
+import { CreateAuth } from "../../auth/usecases/create-auth";
 
 export class CreateAuthForContactPersonMiddleware {
      perform = async (request: Request, response: Response, next: NextFunction) => {

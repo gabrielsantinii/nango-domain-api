@@ -5,5 +5,6 @@ export interface UsersDaoResult {
     findStudentsByInstitutionId: (institutionId: string) => Promise<ReadUserDto[]>;
     findEmployeesByInstitutionId: (institutionId: string) => Promise<ReadUserDto[]>;
     findById: (id: string) => Promise<ReadUserDto | null>;
-    create: (userData: CreateUserDto) => Promise<ReadUserDto>
+    create: (userData: CreateUserDto) => Promise<ReadUserDto>;
+    findByAuthId: (authId: string) => Promise<ReadUserDto | null>
 }

@@ -42,6 +42,12 @@ export class InstitutionsRoutesConfig extends SharedRoutesConfig {
             mountDashboardController.perform,
         ]);
 
+        this.app.get(`${this.path}/auth/:authId`, [
+            validateNeededInstitutionId.validate,
+            getInstitutionByIdMiddleware.perform,
+            mountDashboardController.perform,
+        ]);
+
         return this.app;
     }
 }

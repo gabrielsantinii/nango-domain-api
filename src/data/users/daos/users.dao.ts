@@ -4,6 +4,7 @@ import { UserModelType } from "../models";
 
 import { Status } from "../../../shared/enums";
 import { logDataFactory } from "../../../shared/factories";
+import { ReadUserDto } from "../dtos";
 
 export class UsersDao implements UsersDaoResult {
     constructor(private readonly User: UserModelType) {}
@@ -28,4 +29,8 @@ export class UsersDao implements UsersDaoResult {
 
         return newUser.save();
     }
+
+    findByAuthId = async (authId: string) => {
+        return this.User.findOne({ authId }).exec();
+    };
 }
