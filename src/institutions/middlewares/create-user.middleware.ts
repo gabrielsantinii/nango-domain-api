@@ -22,7 +22,7 @@ export class CreateUserMiddleware {
                 data: { createdUser, createdInstitution },
                 message:
                     "Instituição, criada com sucesso! Em alguns instantes, " +
-                    institutionData.contactPerson.name +
+                    institutionData.contactPerson.firstName +
                     " receberá um e-mail com os dados de acesso.",
             });
         } catch (err: any) {
@@ -32,7 +32,7 @@ export class CreateUserMiddleware {
                     {
                         message:
                             "Erro ao criar os dados de acesso para " +
-                            institutionData.contactPerson.name +
+                            institutionData.contactPerson.firstName +
                             ". Entre em contato com o suporte.",
                         error: err.message,
                     },
@@ -50,16 +50,15 @@ export class CreateUserMiddleware {
     };
 
     private formatUser = (
-        userData: { name: string; email: string; phone: string },
+        userData: { firstName: string; lastName: string; pass: string; email: string; phone: string },
         institutionId: string,
         authId: string
     ): CreateUserDto => {
-        const [firstName, lastName] = userData.name;
         return {
             authId,
-            displayName: userData.name,
-            firstName: firstName || '', 
-            lastName: lastName || '',
+            displayName: `${userData.firstName} ${userData.lastName}`,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
             email: userData.email,
             institutions: [institutionId],
             phone: userData.phone,

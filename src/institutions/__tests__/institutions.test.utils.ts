@@ -6,7 +6,6 @@ export class InstitutionsTestUtils {
     static getValidInstitution(): CreateInstitutionDto {
         return {
             name: "Valid",
-            email: "valid@gmail.com",
             periodEndDate: new Date(),
             photoUrl: "",
             rangeOfEmployees: "11-100",
@@ -15,9 +14,11 @@ export class InstitutionsTestUtils {
             categories: [InstitutionCategory.college],
             address: AddressTestUtils.getValidAddress(),
             contactPerson: {
-                name: "person 1",
+                firstName: "person 1",
+                lastName: "person 2",
                 email: "emal@gmail.com",
                 phone: "47988210231",
+                pass: "1233",
             },
         };
     }

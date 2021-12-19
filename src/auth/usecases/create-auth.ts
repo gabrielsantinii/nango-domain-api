@@ -1,12 +1,11 @@
-import { generate as shortidFactory } from "shortid";
-import { CreateAuthUserType } from "../interfaces";
+import firebaseAdmin from "firebase-admin";
 import { CreateAuthResult } from "./create-auth.interface";
 
 export class CreateAuth implements CreateAuthResult {
-    constructor(private readonly email: string, private readonly createFirebaseUser: CreateAuthUserType) {}
-    
+    constructor(private readonly email: string, private readonly password: string) {}
+
     async perform() {
-        const createdAuth = await this.createFirebaseUser({ email: this.email, password: shortidFactory() });
+        const createdAuth = await firebaseAdmin.auth().createUser({ email: this.email, password: this.password });
         if (!createdAuth.uid) {
             throw new Error("uid não foi gerado.");
         }

@@ -11,8 +11,10 @@ export interface CreateInstitutionDto {
     periodEndDate: Date;
     photoUrl?: string;
     contactPerson: {
-        name: string;
+        firstName: string;
+        lastName: string;
         email: string;
         phone: string;
+        pass: string;
     };
 }

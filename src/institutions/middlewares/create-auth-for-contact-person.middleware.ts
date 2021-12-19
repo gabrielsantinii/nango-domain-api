@@ -1,17 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import { generate as shortIdFactory } from 'shortid'
-import firebaseAdmin from "firebase-admin";
 import { CreateInstitutionDto } from "../../data/institutions/dtos";
+import { CreateAuth } from "../../auth/usecases";
 
-export class CreateAuthMiddleware {
-    async perform(request: Request, response: Response, next: NextFunction) {
+export class CreateAuthForContactPersonMiddleware {
+     perform = async (request: Request, response: Response, next: NextFunction) => {
         try {
             const institutionData = request.body as CreateInstitutionDto;
             const authEmail = institutionData.contactPerson.email;
-            const createdAuth = await firebaseAdmin.auth().createUser({ email: authEmail, password: shortIdFactory()})
-            if (!createdAuth.uid) {
-                throw new Error("uid não foi gerado.");
-            }
+            const authPass = institutionData.contactPerson.pass;
+            const createdAuth = await this.createAuth({ email: authEmail, password: authPass });
             request.body.createdAuthUid = createdAuth.uid;
             next();
         } catch (err: any) {
@@ -27,4 +24,10 @@ export class CreateAuthMiddleware {
             });
         }
     }
+
+    private createAuth = async ({ email, password }: { email: string; password: string }) => {
+        const createAuthUseCase = new CreateAuth(email, password);
+        const createdAuth = await createAuthUseCase.perform();
+        return createdAuth;
+    };
 }

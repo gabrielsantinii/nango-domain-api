@@ -8,7 +8,7 @@ import {
     ValidateInstitutionFields,
     CreateInstitutionMiddleware,
     CreateUserMiddleware,
-    CreateAuthMiddleware,
+    CreateAuthForContactPersonMiddleware,
 } from "./middlewares";
 
 const mountDashboardController = new MountDashboardController();
@@ -17,7 +17,7 @@ const validateNeededInstitutionId = new ValidateNeededInstitutionId();
 
 const validateInstitutionFields = new ValidateInstitutionFields();
 const createInstitution = new CreateInstitutionMiddleware();
-const createAuth = new CreateAuthMiddleware();
+const createAuth = new CreateAuthForContactPersonMiddleware();
 const createUser = new CreateUserMiddleware();
 
 const resultValidationMiddleware = new ResultValidationMiddleware();

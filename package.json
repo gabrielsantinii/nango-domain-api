@@ -6,7 +6,7 @@
     "license": "MIT",
     "scripts": {
         "test": "jest",
-        "dev": "export TEST=* && ts-node-dev src/server.ts"
+        "dev": "ts-node-dev src/server.ts"
     },
     "dependencies": {
         "cors": "^2.8.5",
