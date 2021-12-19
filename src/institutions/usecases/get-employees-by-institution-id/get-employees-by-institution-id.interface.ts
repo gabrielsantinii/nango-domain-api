@@ -5,7 +5,7 @@ export interface EmployeeByInstitutionId {
     firstName: string;
     lastName: string;
     status: Status;
-    photoUrl: string;
+    photoUrl?: string;
 }
 
 export interface GetEmployeeByInstitutionIdResult {

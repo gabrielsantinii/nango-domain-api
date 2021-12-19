@@ -3,7 +3,7 @@ export interface StudentByInstitutionId {
     id: string;
     firstName: string;
     lastName: string;
-    photoUrl: string;
+    photoUrl?: string;
     displayName: string;
     email: string;
 }
