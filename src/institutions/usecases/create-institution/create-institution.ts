@@ -1,6 +1,6 @@
 import { InstitutionsDaoResult } from "../../../data/institutions/daos";
 import { CreateInstitutionDto } from "../../../data/institutions/dtos";
-import { CreateInstitutionResult } from "./create-institution.interface";
+import { CreateInstitutionResult } from ".";
 
 export class CreateInstitution implements CreateInstitutionResult {
     constructor(

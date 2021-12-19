@@ -1,2 +1,2 @@
 export * from './create-institution'
-export * from './create-institution.spec'
+export * from './create-institution.interface'
