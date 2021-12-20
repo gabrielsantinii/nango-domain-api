@@ -69,8 +69,14 @@ Utilize [http://localhost:8080](http://localhost:8080) realizar as requisições
 ### `yarn test`
 
 Executa todos os arquivos de testes, gerando um relatório (Coverage) de cobertura da aplicação.\
-Utilize [http://localhost:8080](http://localhost: ) realizar as requisições localmente.
+Utilize [http://localhost:8080](http://localhost:8080) realizar as requisições localmente.
 
 ### `yarn start`
 
 Gera o build de produção, na pasta `dist` que será criada na raíz do projeto com os arquivos transpilados de Typescript para Javascript.
+
+
+## CI/CD Actions, Deployment
+
+Configurado o Github Actions no projeto, de forma que cada `push` na main, rodará todos os testes com `yarn test`.
+Para o deploy, está sendo utilizado o Heroku como Cloud Provider. Também está integrado ao Github Actions, de maneira que cada `push` que passa pelos pipelines de build e testes, é enviado para o Heroku que atualiza automaticamente.
