@@ -7,6 +7,7 @@ const mockUsersDao: UsersDaoResult = {
     findById: jest.fn(),
     findEmployeesByInstitutionId: jest.fn(),
     findStudentsByInstitutionId: jest.fn(),
+    findByAuthId: jest.fn(),
 };
 
 describe("create-user needs to create a new user", () => {

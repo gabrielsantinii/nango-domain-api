@@ -30,6 +30,9 @@ export class MountDashboardController {
         return response.json({
             errors: this.errors,
             data: {
+                institution: {
+                    name: institution.name
+                },
                 students: students,
                 classes: classes,
                 employees: employees,

@@ -6,6 +6,7 @@ export class GetInstitutionById implements GetInstitutionByIdResult {
 
     async perform() {
         const institutionById = await this.institutionsDao.findById(this.institutionId);
+        console.log("Institution ID: ", this.institutionId)
         if (!institutionById) {
             throw Error("The institutionId does not exist.");
         }

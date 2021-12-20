@@ -4,21 +4,24 @@ import { ResultValidationMiddleware } from "../shared/middlewares";
 import { MountDashboardController } from "./controllers";
 import {
     GetInstitutionByIdMiddleware,
-    ValidateNeededInstitutionId,
+    ValidateNeededAuthId,
     ValidateInstitutionFields,
     CreateInstitutionMiddleware,
     CreateUserMiddleware,
     CreateAuthForContactPersonMiddleware,
+    GetInstitutionIdByAuthId,
 } from "./middlewares";
 
 const mountDashboardController = new MountDashboardController();
 const getInstitutionByIdMiddleware = new GetInstitutionByIdMiddleware();
-const validateNeededInstitutionId = new ValidateNeededInstitutionId();
+const validateNeededAuthId = new ValidateNeededAuthId();
 
 const validateInstitutionFields = new ValidateInstitutionFields();
 const createInstitution = new CreateInstitutionMiddleware();
 const createAuth = new CreateAuthForContactPersonMiddleware();
 const createUser = new CreateUserMiddleware();
+
+const getInstitutionIdByAuthId = new GetInstitutionIdByAuthId();
 
 const resultValidationMiddleware = new ResultValidationMiddleware();
 
@@ -36,14 +39,9 @@ export class InstitutionsRoutesConfig extends SharedRoutesConfig {
             createUser.perform,
         ]);
 
-        this.app.get(`${this.path}/:institutionId/dashboard`, [
-            validateNeededInstitutionId.validate,
-            getInstitutionByIdMiddleware.perform,
-            mountDashboardController.perform,
-        ]);
-
-        this.app.get(`${this.path}/auth/:authId`, [
-            validateNeededInstitutionId.validate,
+        this.app.get(`${this.path}/:authId/dashboard`, [
+            validateNeededAuthId.validate,
+            getInstitutionIdByAuthId.perform,
             getInstitutionByIdMiddleware.perform,
             mountDashboardController.perform,
         ]);

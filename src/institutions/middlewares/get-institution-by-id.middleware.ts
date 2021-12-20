@@ -6,8 +6,9 @@ import { GetInstitutionById } from "../usecases/get-institution-by-id";
 export class GetInstitutionByIdMiddleware {
     async perform(request: Request, response: Response, next: NextFunction) {
         try {
-            const institutionId = request.params.institutionId;
+            const institutionId = request.body.institutionId;
             const institutionsDao = new InstitutionsDao(InstitutionModel);
+            console.log("Insitution Id: ", institutionId);
             const getInstitutionById = new GetInstitutionById(institutionId, institutionsDao);
             const institution = await getInstitutionById.perform();
             request.body.institution = institution;
